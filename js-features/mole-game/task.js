@@ -1,4 +1,4 @@
-"use strict"
+"use strict";
 
 const dead = document.getElementById("dead");
 const lost = document.getElementById("lost");
