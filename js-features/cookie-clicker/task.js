@@ -13,7 +13,7 @@ cookie.onclick = () => {
     count++;
     cookie.width = 180;
     setTimeout(() => {
-        clicker.width = 200;
+        cookie.width = 200;
     }, 100);
     counter.textContent = count;
 
