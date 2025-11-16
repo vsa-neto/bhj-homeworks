@@ -1,6 +1,7 @@
 "use strict";
 
 const card_1 = document.querySelector('#card_1');
+const card_2 = document.querySelector('#card_2');
 
 
 class Rotator {
@@ -30,10 +31,8 @@ class Rotator {
     }
 };
 
-
 const rotator1 = new Rotator(card_1);
 rotator1.rotate();
-
 
 const rotator2 = new Rotator(card_2);
 rotator2.rotate();
