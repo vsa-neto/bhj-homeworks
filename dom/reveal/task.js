@@ -1,7 +1,5 @@
 "use strict";
 
-
-
 const reveals = Array.from(document.querySelectorAll('.reveal'));
 
 function isVisible(elem) {
@@ -13,15 +11,14 @@ function isVisible(elem) {
 }
 
 reveals.forEach(elem => {
-    setInterval(() => {
-        if (isVisible(elem)) {
+document.addEventListener('scroll', ()=>{
+            if (isVisible(elem)) {
             elem.classList.add('reveal_active');
         } else {
             elem.classList.remove('reveal_active');
         }
-    }, 1000);
 });
-
+});
 
 
 
