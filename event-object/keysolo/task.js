@@ -4,98 +4,40 @@ class Game {
     this.wordElement = container.querySelector('.word');
     this.winsElement = container.querySelector('.status__wins');
     this.lossElement = container.querySelector('.status__loss');
-
-   
-    this.counter = container.querySelector('.counter p');
-    this.length;
+    this.counterLocation = container.querySelector('.counter span');
+    this.symbolCounter = 0;
 
     this.reset();
+    this.resetCounter();
     this.registerEvents();
-
   }
 
   reset() {
     this.setNewWord();
     this.winsElement.textContent = 0;
     this.lossElement.textContent = 0;
+    clearInterval(this.intervalId);
   }
 
-  resetCounter(){
-    this.length = this.wordElement.querySelectorAll('.symbol').length;
-    this.counter.innerHTML = this.length;
+  resetCounter() {
+    this.symbols = Array.from(document.querySelectorAll('.symbol'));
+    this.timer = this.symbols.length;
+    this.counterLocation.innerHTML = this.timer;
   }
 
-// refreshCounter(){
-// this.word = (this.wordElement.textContent.split('')).join("").replace(/\s+/g, '');
-//  console.log (this.word);
-//  console.log (this.wordList[0]);
-// }
+  count() {
+    this.intervalId = setInterval(() => {
+      if (this.timer > 0) {
+        this.timer--;
+        this.counterLocation.innerHTML = this.timer;
 
-
-
-count(){
-
-console.log(this.wordList); 
-console.log(this.wordList.length);
-console.log(this.wordList.length-1);
-console.log((this.wordList[this.wordList.length-1]).classList.contains('symbol_correct'));
-
-
-let symbolCount = 0;
-console.log((this.wordList[symbolCount]).classList.contains('symbol_correct'));
-
-
-let intervalId = setInterval(() => {
-
- if((this.wordList[this.wordList.length-1]).classList.contains('symbol_correct')){
-  clearInterval(intervalId);
-  return;
-  } 
-
-if(this.wordTime > 0){
-    if((this.wordList[symbolCount]).classList.contains('symbol_correct')){
-       symbolCount++;
-       this.wordTime --;
-       this.counter.innerHTML = this.wordTime;
-
-    } else {
-        clearInterval(intervalId);
+      } else {
+        clearInterval(this.intervalId);
         this.fail();
-    }
-
-
-  } else {
-  clearInterval(intervalId);
-  this.fail();
+        this.resetCounter();
+      }
+    }, 1000);
   }
-
-
-if(!(this.wordList[symbolCount]).classList.contains('symbol_correct')){
-  clearInterval(intervalId);
-  return;
-}
-
-
-if(this.wordTime > 0 && (this.wordList[symbolCount]).classList.contains('symbol_correct') ){
-
-    symbolCount++;
-
-
-
-   this.wordTime --;
-   this.counter.innerHTML = this.wordTime;
-
-} else if(this.wordTime === 0){
-  clearInterval(intervalId);
-  this.fail();
-
-} else {
-  clearInterval(intervalId);
-  this.fail();
-}
-}, 5000);
-
-}
 
   registerEvents() {
     /*
@@ -106,43 +48,40 @@ if(this.wordTime > 0 && (this.wordList[symbolCount]).classList.contains('symbol_
       При неправильном вводе символа - this.fail();
       DOM-элемент текущего символа находится в свойстве this.currentSymbol.
      */
-
-      
-
     document.addEventListener('keyup', (event) => {
-
-      this.wordList = this.wordElement.querySelectorAll('span');
-      this.wordTime = this.wordList.length;
- 
-
       if (event.key === 'Shift' || event.key === 'Control' || event.key === 'Alt') {
         return;
       }
+
       if (event.key === this.currentSymbol.textContent) {
+        console.log('success');
+
+        if (this.symbols[this.symbols.length - 1].classList.contains('symbol_current')) {
+          console.log('true true true');
+          clearInterval(this.intervalId);
+          this.success();
+          this.resetCounter();
+          return;
+        }
+        if (event.key === this.symbols[0].textContent) {
+          console.log(`symbol: ${this.symbols[0].textContent}`);
+          clearInterval(this.intervalId);
+          this.count();
+        }
         this.success();
 
-        if(this.wordList[0].classList.contains('symbol_correct')){
-           this.count();
-        } 
-          if(this.wordList[this.wordList.length-1].classList.contains('symbol_correct')){
-        } 
-        
-      } else { this.fail(); }
-
-    
+      } else {
+        clearInterval(this.intervalId);
+        this.fail();
+        this.resetCounter();
+      }
     });
-
-
-
   }
 
   success() {
     if (this.currentSymbol.classList.contains("symbol_current")) this.currentSymbol.classList.remove("symbol_current");
     this.currentSymbol.classList.add('symbol_correct');
     this.currentSymbol = this.currentSymbol.nextElementSibling;
-
-
-
 
     if (this.currentSymbol !== null) {
       this.currentSymbol.classList.add('symbol_current');
@@ -152,6 +91,7 @@ if(this.wordTime > 0 && (this.wordList[symbolCount]).classList.contains('symbol_
     if (++this.winsElement.textContent === 10) {
       alert('Победа!');
       this.reset();
+
     }
     this.setNewWord();
   }
@@ -160,11 +100,9 @@ if(this.wordTime > 0 && (this.wordList[symbolCount]).classList.contains('symbol_
     if (++this.lossElement.textContent === 5) {
       alert('Вы проиграли!');
       this.reset();
+
     }
     this.setNewWord();
-    this.counter.innerHTML = this.wordTime;
-
-    this.resetCounter();
   }
 
   setNewWord() {
@@ -193,15 +131,17 @@ if(this.wordTime > 0 && (this.wordList[symbolCount]).classList.contains('symbol_
   }
 
   renderWord(word) {
-    const html = [...word].map((s, i) =>
-      `<span class="symbol ${i === 0 ? 'symbol_current' : ''}">${s}</span>`
-    ).join('');
+    const html = [...word]
+      .map(
+        (s, i) =>
+          `<span class="symbol ${i === 0 ? 'symbol_current' : ''}">${s}</span>`
+      )
+      .join('');
     this.wordElement.innerHTML = html;
+
     this.currentSymbol = this.wordElement.querySelector('.symbol_current');
 
-    this.resetCounter();
   }
 }
 
 new Game(document.getElementById('game'));
-
