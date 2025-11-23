@@ -9,3 +9,44 @@ body {
 .poll__title {
   margin-bottom: 20px;
 }
+
+
+.lightbox {
+  position: absolute;
+  display: none;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 2;
+}
+
+.lightbox__active {
+display: block;
+}
+
+.answer__block{
+  position: relative;
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  margin-top: 50px;
+  width: 400px;
+  height: 100px;
+  background-color: rgb(255, 255, 255);
+}
+
+.answer__block p{
+  margin-top: 20px;
+}
+
+.close{ 
+  position: absolute;
+  text-align: center;
+
+  width: 80px;
+  height: 30px;
+  right: 20px;
+  bottom: 10px;
+  color: white;
+  background-color: rgb(28, 123, 255);
+}

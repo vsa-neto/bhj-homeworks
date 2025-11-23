@@ -3,23 +3,29 @@
 }
 
 .has-tooltip {
+  position: relative;
+  display: inline-block;
   color: #000;
-  background: yellow;
+  background: rgb(255, 255, 12);
 }
 
 .has-tooltip:hover {
-  color: red;
+  color: rgb(255, 81, 0);
 }
 
 .tooltip {
-  position: fixed;
+  position: absolute;
   display: none;
-  background: black;
+  background: rgb(0, 0, 0);
+
+  text-align: center;
   padding: 5px;
   border-radius: 5px;
   color: #fff;
+
 }
 
 .tooltip_active {
   display: block;
+  z-index: 2;
 }
