@@ -1,11 +1,16 @@
+'use strict'; 
 
 const inputField = document.getElementById('task__input');
 const tasksList = document.querySelector('.tasks__list');
 const taskAdd = document.getElementById('tasks__add');
 
+// let template = document.querySelector('.task');
+// template.remove();
+
 let removeList = 0;
 
-taskAdd.addEventListener('click', () => {
+taskAdd.addEventListener('click', (event) => {
+event.preventDefault();
   if (inputField.value !== '' ) {
       createTask();
       taskRemove();
@@ -13,7 +18,8 @@ taskAdd.addEventListener('click', () => {
 });
 
 inputField.addEventListener('keydown', event => {
-  if (event.key === 'Enter' && inputField.value !== '' ) {
+  
+  if (inputField.value !== '' && event.key === 'Enter') {
       createTask();
       taskRemove();
   }
