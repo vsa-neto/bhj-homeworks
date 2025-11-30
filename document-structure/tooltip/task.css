@@ -14,18 +14,18 @@
 }
 
 .tooltip {
-  position: absolute;
+  position: fixed;
   display: none;
-  background: rgb(0, 0, 0);
+  background: rgb(16, 16, 16);
 
   text-align: center;
   padding: 5px;
   border-radius: 5px;
-  color: #fff;
+  color: #ffffff;
 
 }
 
 .tooltip_active {
-  display: block;
-  z-index: 2;
+  display: inline;
+  z-index: 10;
 }

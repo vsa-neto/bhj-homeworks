@@ -3,16 +3,28 @@ const items = document.getElementById('items');
 const loader = document.getElementById('loader');
 const xhr = new XMLHttpRequest();
 
-xhr.addEventListener('readystatechange', () => {
-    if (xhr.readyState === xhr.DONE) {
 
-        loader.classList.remove('loader_active');
-        const response = JSON.parse(xhr.response);
-        const valute = response.response.Valute;
+// localStorage.clear();
+const storageName = localStorage.getItem('response');
 
-        dataFilling(valute);
-    }
-});
+if (storageName) {
+    dataFilling(JSON.parse(storageName));
+    loader.classList.remove('loader_active');
+} else {
+    xhr.addEventListener('readystatechange', () => {
+        if (xhr.readyState === xhr.DONE) {
+
+            loader.classList.remove('loader_active');
+            const response = JSON.parse(xhr.response);
+            const valute = response.response.Valute;
+
+            console.log(valute);
+            
+            saveResponse('response', valute);
+            dataFilling(valute);
+        }
+    });
+}
 
 xhr.open('GET', 'https://students.netoservices.ru/nestjs-backend/slow-get-courses');
 xhr.send();
@@ -34,6 +46,10 @@ function dataFilling(obj) {
                     руб.
                 </div>
           </div>`);
-        console.log(obj[i].Name);
     }
+}
+
+function saveResponse(key, object) {
+    localStorage.setItem(key, JSON.stringify(object));
+    console.log(typeof(localStorage.getItem(key)));
 }

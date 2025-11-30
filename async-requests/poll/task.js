@@ -46,28 +46,3 @@ xhr.addEventListener('readystatechange', () => {
 xhr.open('GET', 'https://students.netoservices.ru/nestjs-backend/poll');
 xhr.send();
 
-
-
-
-
-
-// function dataFilling(obj) {
-//     for (let i in obj) {
-//         let charCode = obj[i].CharCode;
-//         let value = obj[i].Value;
-
-//         items.insertAdjacentHTML(
-//             "beforeEnd", `<div class="item">
-//             <div class="item__code">
-//                    1 ${charCode}
-//                 </div>  =&ensp;
-//                 <div class="item__value">
-//                     ${value}
-//                 </div>
-//                 <div class="item__currency">
-//                     руб.
-//                 </div>
-//           </div>`);
-//         console.log(obj[i].Name);
-//     }
-// }

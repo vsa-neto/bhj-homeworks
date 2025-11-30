@@ -1,51 +1,56 @@
+'use strict';
 
 const linkList = document.querySelectorAll('.has-tooltip');
-let hintPosition = 'left';
+let hintPosition = 'right';
 
 
 linkList.forEach(link => {
-       let title = link.getAttribute('title');
-       let hint = document.createElement('div');
 
-       hint.textContent = title;
-       hint.classList.add('tooltip');
+  let title = link.getAttribute('title');
+  let hint = document.createElement('div');
 
-       let widthHint = (hint.textContent.length*9);
-       let widthLink = (link.textContent.length*9);
-       hint.style.width = widthHint+'px';
-       link.appendChild(hint);
-       hint.setAttribute('data-position', hintPosition);
+  hint.textContent = title;
+  hint.classList.add('tooltip');
 
+  let widthHint = (hint.textContent.length * 9.2);
+  let widthLink = (link.textContent.length * 9.2);
 
-switch (hintPosition) {
-  case 'top':
-    hint.style.top = '-30px';
-    break;
-  case 'bottom':
-     hint.style.top = '20px';
-    break;
-  case 'left':
-    hint.style.left = `-${widthHint + 15}px`;
-    hint.style.top = '-5px';
-    break;
-  case 'right':
-    hint.style.top = '-5px';
-    hint.style.left = `${widthLink + 10}px`;
-    break;
-}
-});
+  hint.style.width = widthHint + 'px';
+  link.insertAdjacentElement("afterEnd", hint);
+  hint.setAttribute('data-position', hintPosition);
 
 
-linkList.forEach(link => {
-    link.addEventListener('click', (e)=>{
-       e.preventDefault();
-      
-       linkList.forEach(link => {
-     if(link === e.target){
-      link.lastChild.classList.toggle('tooltip_active');
-     } else {
-        link.lastChild.classList.remove('tooltip_active');
-     }
-       }); 
+  switch (hintPosition) {
+    case 'top':
+      hint.style.marginTop = '-30px';
+      hint.style.marginLeft = `-${widthLink}px`;
+      break;
+    case 'bottom':
+      hint.style.marginTop = '20px';
+      hint.style.marginLeft = `-${widthLink}px`;
+      break;
+    case 'left':
+      hint.style.marginTop = '-5px';
+      hint.style.marginLeft = `5px`;
+      break;
+    case 'right':
+      hint.style.marginTop = '-5px';
+      hint.style.marginLeft = `-${widthHint + widthLink + 15}px`;
+      break;
+  }
+
+  link.addEventListener('click', (e) => {
+    e.preventDefault();
+
+    linkList.forEach(link => {
+      if (link === e.target) {
+        link.nextSibling.classList.toggle('tooltip_active');
+      } else {
+        link.nextSibling.classList.remove('tooltip_active');
+      }
     });
+
+  });
 });
+
+
