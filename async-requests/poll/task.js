@@ -1,8 +1,8 @@
+'use strict';
 
 const poll = document.querySelector('.poll');
 const titlePlace = document.getElementById('poll__title');
 const answersPlace = document.getElementById('poll__answers');
-console.log(answersPlace);
 
 const answerResult = document.createElement('div');
 poll.insertAdjacentElement('beforeEnd', answerResult);
@@ -17,13 +17,8 @@ xhr.addEventListener('readystatechange', () => {
         let title = response.data.title;
         let answers = response.data.answers;
 
-        console.log(id);
-        console.log(title);
-        console.log(answers[1]);
-
         titlePlace.append(title);
         answers.forEach(item => {
-            console.log(item);
             answersPlace.insertAdjacentHTML("beforeEnd", `<button class="poll__answer">${item}</button> `);
         });
 
@@ -33,7 +28,6 @@ xhr.addEventListener('readystatechange', () => {
                 if (e.target === elem) {
                     alert("спасибо, ваш голос засчитан!");
                     answerResult.textContent = '';
-                    console.log('ok');
                     request2(index, id);
                 }
             });
@@ -45,7 +39,6 @@ xhr.open('GET', 'https://students.netoservices.ru/nestjs-backend/poll');
 xhr.send();
 
 function request2(index, id){
-    console.log('Response-2');
 const xhr2 = new XMLHttpRequest();
 xhr2.open( 'POST', 'https://students.netoservices.ru/nestjs-backend/poll' );
 xhr2.setRequestHeader( 'Content-type', 'application/x-www-form-urlencoded' );

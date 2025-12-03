@@ -19,7 +19,7 @@ form.addEventListener('submit', (e) => {
 
             fileName.textContent = 'файл отправлен';
             setTimeout(() => {
-                fileName.textContent = 'Выберите файл';
+                fileName.textContent = 'Имя файла';
                 progress.value = 0;
             }, 2500);
         }
