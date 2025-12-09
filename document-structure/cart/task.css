@@ -1,4 +1,5 @@
 body {
+  position: relative;
   font-family: Arial;
 }
 .cart__products {
@@ -14,9 +15,11 @@ body {
   position: absolute;
   top: 0;
   right: 0;
+  background-color: #fff;
   border: 2px solid green;
   border-radius: 50%;
   padding: 2px 5px;
+  z-index: 2;
 }
 
 .cart__product-image {
@@ -86,6 +89,26 @@ body {
   opacity: 0.8;
 }
 
+.product__del {
+  background: rgb(0, 125, 175);
+}
+.product__del:hover {
+    opacity: 0.8;
+}
+
+
 .product-shadow {
   position: absolute;
+}
+
+
+
+
+
+
+.product__slide {
+position: absolute;
+/* left: 380px; */
+transition: all 0.2s;
+z-index: 1;
 }

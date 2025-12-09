@@ -7,7 +7,7 @@ const button = document.getElementById('tasks__add');
 
 tasks.addEventListener('click', (event) => {
   if (event.target === button && inputField.value !== '') {
-   // event.preventDefault(); // <-- не уверен нужен ли preventDefault();
+   event.preventDefault();
     createTask();
   }
 

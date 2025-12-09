@@ -1,3 +1,8 @@
+.content {
+  display: flex;
+  position: relative;
+}
+
 .signin {
   display: none;
 }
@@ -44,4 +49,25 @@
 .welcome_active {
   display: block;
   text-align: center;
+}
+
+
+
+.exit {
+  display: none;
+  margin-top: 20px;
+  text-align: center;
+  padding: 5px;
+  color: rgb(188, 188, 188);
+
+  cursor: pointer;
+
+}
+
+.exit:hover {
+  color: rgb(207, 72, 133);
+}
+
+.exit_active {
+  display: block;
 }

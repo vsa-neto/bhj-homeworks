@@ -29,17 +29,17 @@ linkList.forEach(link => {
       hint.style.marginTop = '20px';
       hint.style.marginLeft = `-${widthLink}px`;
       break;
-    case 'left':
+    case 'right':
       hint.style.marginTop = '-5px';
       hint.style.marginLeft = `5px`;
       break;
-    case 'right':
+    case 'left':
       hint.style.marginTop = '-5px';
       hint.style.marginLeft = `-${widthHint + widthLink + 15}px`;
       break;
   }
 
-  link.addEventListener('click', (e) => {
+  link.addEventListener('mouseover', (e) => {
     e.preventDefault();
 
     linkList.forEach(link => {

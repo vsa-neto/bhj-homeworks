@@ -1,6 +1,7 @@
 .idea
 DS_Store
 event-object/keysolo/task-reserv.js
+client-state/popup/index.html
 simulator-forms/
 
 *task copy.js
